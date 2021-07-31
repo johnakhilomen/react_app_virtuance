@@ -27,3 +27,32 @@ You can run each of these commands in different terminals
 ## Tradeoffs and follow-ups
 
 [ Add Your Notes Here ]
+
+## On the Sever-side:
+
+- Added a middleware to validate any request for the HTTP methods PATCH 
+- Moved images array away from the index.ts into a different file data.ts 
+- because the index file was unnecessarily long.
+- Added types to every Request, Response and Next objects.
+- Added AppController to process every Api's Request 
+
+A shorter logical code-structure is easier to read, easier to understand, and easier to troubleshoot. Furthermore classes have been into smaller classes to avoid one class containing too many responsibilities.
+
+Improvement:
+Implementing Dependency Injection for relationships among classes would have been a way to improve the implementation for the server-side.
+
+## Frond end:
+***imagesAPI***
+ - Implemented updateImages and fetchImages methods
+ - initialized the defaults baseURL for axios
+ - Added a request object to process Axios's request calls (Get and Update)
+ - Added two reusable methods for response and error
+
+ ***imageSlices***
+ - Implemented two thunks for getting images and updating images
+ - Implemented two reducers for getting images and updating images
+
+ ***Images***
+ - Iterated value to display images and text fields with names associated with images
+ - Added setName event handler for onChange event to edit image's name
+ - Added useEffect to get Images after component is mounted
