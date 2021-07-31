@@ -1,14 +1,17 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState, AppThunk } from '../../app/store';
-import { fetchImages } from './imagesAPI';
+import { createSlice } from '@reduxjs/toolkit';
+import { fetchImages, updateImages } from './imagesAPI';
 
 // TODO
 // Create Image type definition
-export interface Image {}
+export interface Image {
+  id: string,
+  name: string,
+  url: string 
+}
 
 export interface ImageState {
   value: Image[];
-  status: 'idle' | 'loading' | 'failed';
+  status: 'idle' | 'loading' | 'failed' | 'loaded';
 }
 
 const initialState: ImageState = {
@@ -19,9 +22,39 @@ const initialState: ImageState = {
 export const imagesSlice = createSlice({
   name: 'images',
   initialState,
-  reducers: {}
+  reducers: {
+    getImages(state, {payload}) {
+      state.status = !payload ? 'failed' : 'loaded';
+      state.value = payload
+    },
+    updateImage(state, {payload})
+    {
+      state.status = !payload ? 'failed' : 'loaded';
+      state.value = payload
+    }
+  }
 });
 
-export const {  } = imagesSlice.actions;
+export const { getImages, updateImage } = imagesSlice.actions;
 
-export default imagesSlice.reducer;
+export const GetImagesThunk = () => async (dispatch: any) => {
+  try {
+    dispatch(getImages(await fetchImages()));
+  } catch (e: any) {
+    return console.error(e.message);
+  }
+}
+
+export const UpdateImageThunk = (body: any) => async (dispatch: any) => {
+  try {
+    dispatch(updateImage(await updateImages(body)));
+  } catch (e: any) {
+    return console.error(e.message);
+  }
+}
+
+const ImageSliceReducer = imagesSlice.reducer;
+export default ImageSliceReducer;
+
+
+
