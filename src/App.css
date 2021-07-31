@@ -1,0 +1,28 @@
+.logo {
+  text-align: center;
+  height: 40vmin;
+  pointer-events: none;
+  margin: 12px auto;
+}
+
+.App-link {
+  color: rgb(112, 76, 182);
+}
+
+.sidebar {
+  background-color: #292e39;
+  display: flex;
+  flex: 1;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+  min-height: 100vh;
+}
+
+.main {
+  display: block;
+  height: 100%;
+  flex: 3;
+}
